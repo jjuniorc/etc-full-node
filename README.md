@@ -50,17 +50,34 @@ Test Parity running using blockchain directory as base path. The command below s
 parity --chain classic --base-path /home/etcmainnet/blockchain --identity "LivenetETCNode" --db-path /home/etcmainnet/blockchain/db --cache-size 1024 --unsafe-expose --port 30303 --jsonrpc-port 8545 --jsonrpc-interface all --jsonrpc-apis all --jsonrpc-hosts all --jsonrpc-cors all --ws-port 8546 --ws-interface all --ws-apis all --ws-origins all --ws-hosts all --no-ancient-blocks --warp --geth --mode active --pruning fast --db-compaction hdd
 ```
 
-And repeat
+After start you'll be able to test api access using your browser by the address:
 
 ```
-until finished
+http://<YOUR SERVER IP OR NAME>:8545/api/health
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Stop the Parity using CTRL+C command.
 
-## Running the tests
+## Daemon execution
 
-Explain how to run the automated tests for this system
+You can install Screen to easily run background process.
+```
+sudo apt install screen
+```
+
+Now you'll be able to attach full node process to another background screen.
+```
+cd /home/etcmainnet
+
+screen -dmSL scretcmainnet parity --chain classic --base-path /home/etcmainnet/blockchain --identity "LivenetETCNode" --db-path /home/etcmainnet/blockchain/db --cache-size 4096 --unsafe-expose --port 30303 --jsonrpc-port 8545 --jsonrpc-interface all --jsonrpc-apis all --jsonrpc-hosts all --jsonrpc-cors all --ws-port 8546 --ws-interface all --ws-apis all --ws-origins all --ws-hosts all --warp --geth --mode active --pruning fast --db-compaction hdd
+```
+
+Every time you need to see background or stop with CTRL+C the process, you can attach the screen by command:
+```
+screen -x scretcmainnet
+```
+
+To deattach use the key CTRL+A and press D.
 
 ### Break down into end to end tests
 
