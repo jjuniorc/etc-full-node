@@ -1,4 +1,4 @@
-# etc-full-node
+# Ethereum Classic Full Node
 Create a Ethereum Classic Full Node Mainnet (Livenet) and Mordor Testnet, both tested running at the same server.
 
 ## Getting Started
@@ -33,15 +33,21 @@ sudo cp parity /usr/local/bin
 source ~/.bashrc
 parity --version
 ```
+Obs.: Geth executable can be used instead, but parity seems fastest to integrate external apps to full node.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Create the blockchain directory at user directory
+```
+cd ~
+mkdir blockchain
+mkdir blockchain/db
+```
 
-Say what the step will be
+Test Parity running using blockchain directory as base path. The command below specify to open all communication ports and block download with pruning fast (1 GB of cache size) for a non ssd disk. Check the Parity documentation for your server configuration at https://wiki.parity.io/Configuring-Parity-Ethereum.
 
 ```
-Give the example
+parity --chain classic --base-path /home/etcmainnet/blockchain --identity "LivenetETCNode" --db-path /home/etcmainnet/blockchain/db --cache-size 1024 --unsafe-expose --port 30303 --jsonrpc-port 8545 --jsonrpc-interface all --jsonrpc-apis all --jsonrpc-hosts all --jsonrpc-cors all --ws-port 8546 --ws-interface all --ws-apis all --ws-origins all --ws-hosts all --no-ancient-blocks --warp --geth --mode active --pruning fast --db-compaction hdd
 ```
 
 And repeat
