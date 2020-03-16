@@ -79,52 +79,55 @@ screen -x scretcmainnet
 
 To deattach use the key CTRL+A and press D.
 
-### Break down into end to end tests
+### Server consumption
 
-Explain what these tests test and why
+Using Node.JS and Web3.js as example of Full node server consumption.
 
+View Node Sync Status (The 8545 port is the RPC port passed in Parity start):
 ```
-Give an example
+var networkAddress = 'http://<YOUR SERVER IP OR NAME>:8545';
+var Web3 = require("web3");
+var web3 = new Web3();
+web3.setProvider(new web3.providers.HttpProvider(networkAddress));
+
+web3.eth.isSyncing().then(function (r)
+{
+    console.log(r); //Eg. currentBlock and highestBlock
+}).catch((error)=>{
+    console.log(error);
+});
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+Check Wallet Address Ether Balance:
 ```
-Give an example
+var networkAddress = 'http://<YOUR SERVER IP OR NAME>:8545';
+const Web3 = require('web3');
+const web3 = new Web3( new Web3.providers.HttpProvider(networkAddress) );
+
+web3.eth.getBalance(address, function (error, result) {
+    if (!error)
+    {
+        var EtherBalance = web3.utils.fromWei(result,'ether');
+        console.log(EtherBalance);
+    }
+    else
+    {
+        //any other error
+        console.log(error);
+    }
+});
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+A Full Node complete integration could be done buy creating routines like Transaction Info, Transfer, Create Contract, etc. Web3.js is a good tool able to deal with those functionalities.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [Parity](https://www.parity.io/) - Ethereum Network Client Application
+* [Node.js](https://nodejs.org/) - Javascript C++ Backend Runtime
+* [Web3.js](https://github.com/ethereum/web3.js) - Ethereum Javascript API
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* **João Costa** (https://github.com/jjuniorc)
